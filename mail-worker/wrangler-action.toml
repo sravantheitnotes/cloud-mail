@@ -13,7 +13,7 @@ custom_domain = true
 # D1 database (binding name must stay lowercase: db)
 [[d1_databases]]
 binding = "db"
-database_name = "cloud-mail"
+database_name = "cloud-mail-db"
 database_id = "2f6c0d9f-7e07-48f0-9d4e-875856cd8d03"
 
 # KV namespace (binding name must stay lowercase: kv)
