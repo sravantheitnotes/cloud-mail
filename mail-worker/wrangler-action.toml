@@ -10,56 +10,45 @@ enabled = true
 pattern = "mail.theitnotes.space"
 custom_domain = true
 
-{
-  // ...
-  "ai": {
-    "binding": "ai"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_id": "2f6c0d9f-7e07-48f0-9d4e-875856cd8d03"
-    }
-  ],
-  // ...
-}
+# D1 database (binding name must stay lowercase: db)
+[[d1_databases]]
+binding = "db"
+database_name = "cloud-mail"
+database_id = "2f6c0d9f-7e07-48f0-9d4e-875856cd8d03"
 
-# The script will handle provisioning these resources dynamically
-#[[d1_databases]]
-#binding = "db"			
-#database_name = ""		
-#database_id = ""		
+# KV namespace (binding name must stay lowercase: kv)
+[[kv_namespaces]]
+binding = "kv"
+id = "57a2fe532150482a9a2e634e41ea3f30"
 
-#[[kv_namespaces]]
-#binding = "kv"			
-#id = ""					
-
+# Optional: R2 bucket for attachments (leave commented out unless you create one)
 #[[r2_buckets]]
-#binding = "r2"			
-#bucket_name = ""		
+#binding = "r2"
+#bucket_name = ""
 
+# Optional: Cloudflare Email Service sending (leave commented out unless enabled)
 #[[send_email]]
-#name = "email"			
+#name = "email"
 
 [ai]
 binding = "ai"
 
 [assets]
-binding = "assets"		
-directory = "./dist"	
+binding = "assets"
+directory = "./dist"
 not_found_handling = "single-page-application"
 run_worker_first = true
 
 [triggers]
-crons = ["0 * * * *"]	
+crons = ["0 * * * *"]
 
 [vars]
-ai_model = "@cf/meta/llama-3.1-8b-instruct-fast"			
-analysis_cache = false			
-orm_log = false			
-domain = ["theitnotes.space"]				
-admin = "admin"					
-jwt_secret = "7fA9cK2mE5xN8qZ1vW4tPb7jMs0xYcNx3mQ6vL9kR2wB5hN8pZ1vW4tPb7jMs0xY"			
+ai_model = "@cf/meta/llama-3.1-8b-instruct-fast"
+analysis_cache = false
+orm_log = false
+domain = ["theitnotes.space"]
+admin = "${ADMIN}"
+jwt_secret = "${JWT_SECRET}"
 
 [build]
 command = "pnpm --prefix ../mail-vue install && pnpm --prefix ../mail-vue run build"
